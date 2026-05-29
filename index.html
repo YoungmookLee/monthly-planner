@@ -67,6 +67,9 @@
       text-transform: uppercase;
     }
 
+    .day-headers span:first-child { color: #f87171; }
+    .day-headers span:last-child  { color: #60a5fa; }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -233,10 +236,11 @@
   let viewMonth = current.getMonth();
 
   // events: { "YYYY-MM-DD": ["event1", "event2", ...] }
-  let events = JSON.parse(localStorage.getItem('planner-events') || '{}');
+  let events = {};
+  try { events = JSON.parse(localStorage.getItem('planner-events') || '{}'); } catch(e) {}
 
   function saveEvents() {
-    localStorage.setItem('planner-events', JSON.stringify(events));
+    try { localStorage.setItem('planner-events', JSON.stringify(events)); } catch(e) {}
   }
 
   function dateKey(y, m, d) {
